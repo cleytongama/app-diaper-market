@@ -20,11 +20,11 @@ export default class Order {
     }
 
     addCoupon(coupon: Coupon) {
-        if(coupon.isExpired()) throw new Error("expired coupon")
+        if (coupon.isExpired()) throw new Error("expired coupon")
         this.coupon = coupon;
     }
 
-    getFreight(){ return this.freigth}
+    getFreight() { return this.freigth }
 
     getNumItems() { return this.items.length; }
 
@@ -36,7 +36,7 @@ export default class Order {
 
         if (this.coupon) {
             total -= (total * this.coupon.percentage) / 100
-        }   
+        }
         return total
     }
 }

@@ -1,16 +1,16 @@
-import Coupon from '../src/Coupon';
-import Item from '../src/Item';
-import Order from '../src/Order';
+import Coupon from '../../src/domain/entity/Coupon';
+import Item from '../../src/domain/entity/Item';
+import Order from '../../src/domain/entity/Order';
 
 let order: Order;
 
 beforeEach(() => {
-    order = new Order( { cpf: "000.584.842-30" });
+    order = new Order({ cpf: "000.584.842-30" });
 })
 
 describe('Class Order', () => {
 
-    test("Deve informar um cpf válido", function () {})
+    test("Deve informar um cpf válido", function () { })
 
     test("Deve criar um pedido com 3 itens", function () {
         order.addItem(new Item(1, "XG", 'Franlda XG', 10), 1)
