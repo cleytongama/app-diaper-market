@@ -1,5 +1,5 @@
 import Order from '../entity/Order';
 
 export default interface IOrderRepository {
-    save(order: Order): void
+    save(order: Order): Promise<void>
 }

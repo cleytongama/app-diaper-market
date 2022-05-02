@@ -2,14 +2,26 @@ import Coupon from './Coupon';
 import Cpf from './Cpf';
 import Item from './Item';
 import OrderItem from './OrderItem';
+import OrderCode from './OrderCode';
 
+type OrderType = {
+    cpf: string,
+    issueDate: Date,
+    sequence: number
+}
 export default class Order {
+    code: OrderCode;
     items: OrderItem[];
     cpf: Cpf;
     coupon: Coupon | undefined;
     freigth: number;
-    constructor({ cpf, issueDate = new Date() }: { cpf: string; issueDate?: Date; }) {
+    issueDate: Date;
+    sequence: number;
+    constructor({ cpf, issueDate = new Date(), sequence = 1 }: OrderType) {
+        this.code = new OrderCode(issueDate, sequence)
         this.cpf = new Cpf(cpf);
+        this.issueDate = issueDate
+        this.sequence = sequence
         this.items = [];
         this.freigth = 0
     }
@@ -23,6 +35,14 @@ export default class Order {
         if (coupon.isExpired()) throw new Error("expired coupon")
         this.coupon = coupon;
     }
+
+    getCpf() { return this.cpf.value }
+
+    getCode() { return this.code.value }
+
+    getOrderItems() { return this.items }
+
+    getCoupon() { return this.coupon?.code }
 
     getFreight() { return this.freigth }
 

@@ -6,9 +6,9 @@ export default class ItemRepositoryMemory implements IItemRepository {
 
     constructor() {
         this.items = [
-            new Item(1, "XG", 'Franlda XG', 10),
-            new Item(2, "XG", 'Franlda XG', 10),
-            new Item(3, "XG", 'Franlda XG', 10)
+            new Item(1, "Instrumentos Musicais", 'Guitarra', 1000),
+            new Item(2, "Instrumentos Musicais", 'Amplificador', 5000),
+            new Item(3, "Acessorios", 'Cabo', 30)
         ]
     }
 

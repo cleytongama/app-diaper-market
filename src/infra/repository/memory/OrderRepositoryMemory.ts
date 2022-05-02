@@ -9,7 +9,7 @@ export default class OrderRepositoryMemory implements IOrderRepository {
         this.order = []
     }
 
-    save(order: Order): void {
+    async save(order: Order): Promise<void> {
         this.order.push(order)
     }
 }

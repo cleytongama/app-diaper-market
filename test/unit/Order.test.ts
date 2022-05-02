@@ -5,7 +5,7 @@ import Order from '../../src/domain/entity/Order';
 let order: Order;
 
 beforeEach(() => {
-    order = new Order({ cpf: "000.584.842-30" });
+    order = new Order({ cpf: "000.584.842-30", issueDate: new Date(), sequence: 1 });
 })
 
 describe('Class Order', () => {
@@ -40,6 +40,13 @@ describe('Class Order', () => {
         order.addItem(new Item(3, "Instrumentos Musicais", "Cabo", 30, 10, 10, 10, 0.9), 3);
         const freight = order.getFreight();
         expect(freight).toBe(260);
+    });
+    test("Deve criar um pedido com código gerado", function () {
+        order.addItem(new Item(1, "Instrumentos Musicais", "Guitarra", 1000, 100, 30, 10, 3), 1);
+        order.addItem(new Item(2, "Instrumentos Musicais", "Amplificador", 5000, 100, 50, 50, 20), 1);
+        order.addItem(new Item(3, "Instrumentos Musicais", "Cabo", 30, 10, 10, 10, 0.9), 3);
+        const code = order.code;
+        expect(code.value).toBe("202200000001");
     });
 
 })

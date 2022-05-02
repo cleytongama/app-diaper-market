@@ -10,7 +10,7 @@ export default class ItemRepositoryDatabase implements ItemRepository {
         if (!itemData) {
             throw new Error('Item not found')
         }
-        const item = new Item(itemData.id, itemData.category, itemData.description, parseFloat(itemData.price));
+        const item = new Item(itemData.id, itemData.category, itemData.description, parseFloat(itemData.price), itemData.width, itemData.height, itemData.length, itemData.weight);
         return item;
     }
 }
