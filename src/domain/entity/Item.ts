@@ -8,12 +8,11 @@ export default class Item {
     }
 
     getDensity() {
-        return this.weight / this.getVolume();
+        return this.weight !== 0 ? this.weight / this.getVolume() : 0;
     }
 
     getFreight() {
         const freight = 1000 * this.getVolume() * (this.getDensity() / 100);
-        // console.log(freight)
         return (freight < 10) ? 10 : freight;
     }
 }

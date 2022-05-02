@@ -6,18 +6,29 @@ import DatabaseConnectionAdapter from '../../src/infra/database/DatabaseConnecti
 import ItemRepositoryDatabase from '../../src/infra/repository/database/ItemRepositoryDatabase';
 import OrderRepositoryDatabase from '../../src/infra/repository/database/OrderRepositoryDatabase';
 import CouponRepositoryDatabase from '../../src/infra/repository/database/CouponRepositoryDatabase';
+import CouponRepositoryMemory from '../../src/infra/repository/memory/CouponRepositoryMemory';
 
 let placeOrder: PlaceOrder;
 
+const makeRepositoryDatabase = () => {
+    const connectDatabase = new DatabaseConnectionAdapter();
+    const itemRepository = new ItemRepositoryDatabase(connectDatabase);
+    const orderRepository = new OrderRepositoryDatabase(connectDatabase);
+    const couponRepository = new CouponRepositoryDatabase(connectDatabase);
+    placeOrder = new PlaceOrder(itemRepository, orderRepository, couponRepository);
+}
+
+const makeRepositoryMemory = () => {
+    const itemRepository = new ItemRepositoryMemory()
+    const orderRepository = new OrderRepositoryMemory()
+    const couponRepository = new CouponRepositoryMemory();
+    placeOrder = new PlaceOrder(itemRepository, orderRepository, couponRepository);
+}
+
 describe("Caso de Uso:: Place Order", () => {
     beforeEach(() => {
-        const connectDatabase = new DatabaseConnectionAdapter()
-        const itemRepository = new ItemRepositoryDatabase(connectDatabase)
-        const orderRepository = new OrderRepositoryDatabase(connectDatabase)
-        const couponRepository = new CouponRepositoryDatabase(connectDatabase);
-        // const itemRepository = new ItemRepositoryMemory()
-        // const orderRepository = new OrderRepositoryMemory()
-        placeOrder = new PlaceOrder(itemRepository, orderRepository, couponRepository);
+        // makeRepositoryDatabase()
+        makeRepositoryMemory()
     })
     test("Deve fazer um pedido", async function () {
         const input = new PlaceOrderDTO.Input("00058484230", new Date(), [

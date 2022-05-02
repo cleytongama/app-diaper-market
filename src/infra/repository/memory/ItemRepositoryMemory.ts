@@ -13,8 +13,9 @@ export default class ItemRepositoryMemory implements IItemRepository {
     }
 
     async findById(idItem: number): Promise<Item> {
-        const item = this.items.find(item => item.idItem === idItem);
-        if (!item) throw new Error("Item not found");
+        const itemData: any = this.items.find(item => item.idItem === idItem);
+        if (!itemData) throw new Error("Item not found");
+        const item = new Item(itemData.idItem, itemData.category, itemData.description, parseFloat(itemData.price));
         return item;
     }
 }
