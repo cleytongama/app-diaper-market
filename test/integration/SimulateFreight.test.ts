@@ -5,13 +5,18 @@ import Item from '../../src/domain/entity/Item';
 import DatabaseConnectionAdapter from '../../src/infra/database/DatabaseConnectionAdapter';
 import ItemRepositoryDatabase from '../../src/infra/repository/database/ItemRepositoryDatabase';
 import ItemRepositoryMemory from '../../src/infra/repository/memory/ItemRepositoryMemory';
+import AbstractRepositoryFactory from '../../src/domain/factory/AbstractRepositoryFactory';
+import { FactoryRepositoryDatabase } from '../../src/infra/factory/FactoryRepositoryDatabase';
+import { FactoryRepositoryMemory } from '../../src/infra/factory/FactoryRepositoryMemory';
 describe("UseCase: Simulate Freigth", () => {
     let simulateFreight: SimulateFreight
     beforeEach(() => {
         const databaseConnection = new DatabaseConnectionAdapter()
         const itemRepository = new ItemRepositoryDatabase(databaseConnection)
         // const itemRepository = new ItemRepositoryMemory()
-        simulateFreight = new SimulateFreight(itemRepository)
+        const abstractRepositoryFactory = new FactoryRepositoryDatabase(databaseConnection)
+        // const abstractRepositoryFactory = new FactoryRepositoryMemory()
+        simulateFreight = new SimulateFreight(abstractRepositoryFactory)
     })
     test("Deve simular o frete dos produtos", async () => {
         const input = new SimulateFreightDTO.Input([

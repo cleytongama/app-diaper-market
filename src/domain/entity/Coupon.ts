@@ -7,7 +7,6 @@ export default class Coupon {
     }
 
     isValid(today: Date = new Date()) {
-        console.log(today)
         return !this.isExpired(today);
     }
 }

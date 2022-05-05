@@ -4,6 +4,6 @@ export namespace PlaceOrderDTO {
         constructor(readonly cpf: string, readonly issueDate: Date, readonly orderItems: any[], readonly coupon?: string) { }
     }
     export class Output {
-        constructor(readonly total: number) { }
+        constructor(readonly code: string, readonly total: number) { }
     }
 }

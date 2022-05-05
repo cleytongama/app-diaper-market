@@ -7,22 +7,20 @@ import ItemRepositoryDatabase from '../../src/infra/repository/database/ItemRepo
 import OrderRepositoryDatabase from '../../src/infra/repository/database/OrderRepositoryDatabase';
 import CouponRepositoryDatabase from '../../src/infra/repository/database/CouponRepositoryDatabase';
 import CouponRepositoryMemory from '../../src/infra/repository/memory/CouponRepositoryMemory';
+import { FactoryRepositoryMemory } from '../../src/infra/factory/FactoryRepositoryMemory';
+import { FactoryRepositoryDatabase } from '../../src/infra/factory/FactoryRepositoryDatabase';
 
 let placeOrder: PlaceOrder;
 
 const makeRepositoryDatabase = () => {
     const connectDatabase = new DatabaseConnectionAdapter();
-    const itemRepository = new ItemRepositoryDatabase(connectDatabase);
-    const orderRepository = new OrderRepositoryDatabase(connectDatabase);
-    const couponRepository = new CouponRepositoryDatabase(connectDatabase);
-    placeOrder = new PlaceOrder(itemRepository, orderRepository, couponRepository);
+    const abstractFactory = new FactoryRepositoryDatabase(connectDatabase)
+    placeOrder = new PlaceOrder(abstractFactory);
 }
 
 const makeRepositoryMemory = () => {
-    const itemRepository = new ItemRepositoryMemory()
-    const orderRepository = new OrderRepositoryMemory()
-    const couponRepository = new CouponRepositoryMemory();
-    placeOrder = new PlaceOrder(itemRepository, orderRepository, couponRepository);
+    const abstractFactory = new FactoryRepositoryMemory()
+    placeOrder = new PlaceOrder(abstractFactory);
 }
 
 describe("Caso de Uso:: Place Order", () => {

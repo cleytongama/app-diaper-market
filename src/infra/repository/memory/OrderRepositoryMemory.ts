@@ -3,13 +3,17 @@ import Order from '../../../domain/entity/Order';
 
 export default class OrderRepositoryMemory implements IOrderRepository {
 
-    order: Order[]
+    orders: Order[]
 
     constructor() {
-        this.order = []
+        this.orders = []
     }
 
     async save(order: Order): Promise<void> {
-        this.order.push(order)
+        this.orders.push(order)
+    }
+
+    async count(): Promise<number> {
+        return this.orders.length
     }
 }

@@ -34,13 +34,6 @@ describe('Class Order', () => {
         expect(order.getTotalOrderItems()).toBe(48);
     });
 
-    test("Deve calcular o frete de 3 itens", function () {
-        order.addItem(new Item(1, "Instrumentos Musicais", "Guitarra", 1000, 100, 30, 10, 3), 1);
-        order.addItem(new Item(2, "Instrumentos Musicais", "Amplificador", 5000, 100, 50, 50, 20), 1);
-        order.addItem(new Item(3, "Instrumentos Musicais", "Cabo", 30, 10, 10, 10, 0.9), 3);
-        const freight = order.getFreight();
-        expect(freight).toBe(260);
-    });
     test("Deve criar um pedido com código gerado", function () {
         order.addItem(new Item(1, "Instrumentos Musicais", "Guitarra", 1000, 100, 30, 10, 3), 1);
         order.addItem(new Item(2, "Instrumentos Musicais", "Amplificador", 5000, 100, 50, 50, 20), 1);
@@ -48,5 +41,4 @@ describe('Class Order', () => {
         const code = order.code;
         expect(code.value).toBe("202200000001");
     });
-
 })

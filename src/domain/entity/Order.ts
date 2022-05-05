@@ -27,7 +27,6 @@ export default class Order {
     }
 
     addItem(item: Item, quantity: number) {
-        this.freigth += item.getFreight() * quantity
         this.items.push(new OrderItem({ code: item.idItem, price: item.price, quantity: quantity }));
     }
 
@@ -45,6 +44,8 @@ export default class Order {
     getCoupon() { return this.coupon?.code }
 
     getFreight() { return this.freigth }
+
+    setFreight(freigth: number) { this.freigth = freigth }
 
     getNumItems() { return this.items.length; }
 
