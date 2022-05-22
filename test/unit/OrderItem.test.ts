@@ -1,4 +1,4 @@
-import OrderItem from "../../src/domain/entity/OrderItem";
+import OrderItem from "../../src/checkout/domain/entity/OrderItem";
 
 describe('Class Order Item', () => {
     test("Deve criar um item de pedido", function () {

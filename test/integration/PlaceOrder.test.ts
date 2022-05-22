@@ -1,32 +1,32 @@
-import OrderRepositoryMemory from '../../src/infra/repository/memory/OrderRepositoryMemory';
-import ItemRepositoryMemory from '../../src/infra/repository/memory/ItemRepositoryMemory';
-import PlaceOrder from '../../src/application/usecase/PlaceOrder';
-import { PlaceOrderDTO } from '../../src/application/dto/PlaceOrderDTO';
-import DatabaseConnectionAdapter from '../../src/infra/database/DatabaseConnectionAdapter';
-import ItemRepositoryDatabase from '../../src/infra/repository/database/ItemRepositoryDatabase';
-import OrderRepositoryDatabase from '../../src/infra/repository/database/OrderRepositoryDatabase';
-import CouponRepositoryDatabase from '../../src/infra/repository/database/CouponRepositoryDatabase';
-import CouponRepositoryMemory from '../../src/infra/repository/memory/CouponRepositoryMemory';
-import { FactoryRepositoryMemory } from '../../src/infra/factory/FactoryRepositoryMemory';
-import { FactoryRepositoryDatabase } from '../../src/infra/factory/FactoryRepositoryDatabase';
+import DatabaseConnectionAdapter from '../../src/shared/infra/database/DatabaseConnectionAdapter';
+import { FactoryRepositoryMemory } from '../../src/checkout/infra/factory/FactoryRepositoryMemory';
+import { FactoryRepositoryDatabase } from '../../src/checkout/infra/factory/FactoryRepositoryDatabase';
+import PlaceOrder from '../../src/checkout/application/usecase/PlaceOrder';
+import { PlaceOrderDTO } from '../../src/checkout/application/dto/PlaceOrderDTO';
+import EventBus from '../../src/shared/infra/event/EventBus';
+import OrderPlacedStockHandler from '../../src/stock/domain/handler/OrderPlacedStockHandler';
+import StockRepositoryDatabase from '../../src/stock/infra/repository/StockRepositoryDatabase';
 
 let placeOrder: PlaceOrder;
+const eventBus = new EventBus()
 
 const makeRepositoryDatabase = () => {
     const connectDatabase = new DatabaseConnectionAdapter();
     const abstractFactory = new FactoryRepositoryDatabase(connectDatabase)
-    placeOrder = new PlaceOrder(abstractFactory);
+    const stockRepository = new StockRepositoryDatabase(connectDatabase)
+    eventBus.subscribe("OrderPlaced", new OrderPlacedStockHandler(stockRepository))
+    placeOrder = new PlaceOrder(abstractFactory, eventBus);
 }
 
 const makeRepositoryMemory = () => {
     const abstractFactory = new FactoryRepositoryMemory()
-    placeOrder = new PlaceOrder(abstractFactory);
+    placeOrder = new PlaceOrder(abstractFactory, eventBus);
 }
 
 describe("Caso de Uso:: Place Order", () => {
     beforeEach(() => {
-        // makeRepositoryDatabase()
-        makeRepositoryMemory()
+        makeRepositoryDatabase()
+        // makeRepositoryMemory()
     })
     test("Deve fazer um pedido", async function () {
         const input = new PlaceOrderDTO.Input("00058484230", new Date(), [

@@ -1,6 +1,6 @@
-import CouponRepositoryDatabase from '../../src/infra/repository/database/CouponRepositoryDatabase';
-import DatabaseConnectionAdapter from '../../src/infra/database/DatabaseConnectionAdapter';
-import ValidateCoupon from '../../src/application/usecase/ValidateCoupon';
+import CouponRepositoryDatabase from '../../src/checkout/infra/repository/database/CouponRepositoryDatabase';
+import DatabaseConnectionAdapter from '../../src/shared/infra/database/DatabaseConnectionAdapter';
+import ValidateCoupon from '../../src/checkout/application/usecase/ValidateCoupon';
 describe("Validate coupon", () => {
     test("Deve validar um cupom de desconto", async () => {
         const databaseConnectionAdapter = new DatabaseConnectionAdapter()

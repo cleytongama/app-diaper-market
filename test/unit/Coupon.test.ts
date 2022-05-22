@@ -1,4 +1,4 @@
-import Coupon from '../../src/domain/entity/Coupon';
+import Coupon from '../../src/checkout/domain/entity/Coupon';
 
 describe('Class Coupon', () => {
 

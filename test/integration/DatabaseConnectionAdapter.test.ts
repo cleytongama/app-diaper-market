@@ -1,4 +1,4 @@
-import DatabaseConnectionAdapter from '../../src/infra/database/DatabaseConnectionAdapter';
+import DatabaseConnectionAdapter from '../../src/shared/infra/database/DatabaseConnectionAdapter';
 
 describe.only("Connection Database", () => {
 

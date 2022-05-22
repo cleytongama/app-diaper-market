@@ -1,13 +1,13 @@
 
-import { SimulateFreightDTO } from '../../src/application/dto/SimulateFreightDTO';
-import SimulateFreight from '../../src/application/usecase/SimulateFreight';
-import Item from '../../src/domain/entity/Item';
-import DatabaseConnectionAdapter from '../../src/infra/database/DatabaseConnectionAdapter';
-import ItemRepositoryDatabase from '../../src/infra/repository/database/ItemRepositoryDatabase';
-import ItemRepositoryMemory from '../../src/infra/repository/memory/ItemRepositoryMemory';
-import AbstractRepositoryFactory from '../../src/domain/factory/AbstractRepositoryFactory';
-import { FactoryRepositoryDatabase } from '../../src/infra/factory/FactoryRepositoryDatabase';
-import { FactoryRepositoryMemory } from '../../src/infra/factory/FactoryRepositoryMemory';
+import { SimulateFreightDTO } from '../../src/checkout/application/dto/SimulateFreightDTO';
+import SimulateFreight from '../../src/checkout/application/usecase/SimulateFreight';
+import Item from '../../src/checkout/domain/entity/Item';
+import DatabaseConnectionAdapter from '../../src/shared/infra/database/DatabaseConnectionAdapter';
+import ItemRepositoryDatabase from '../../src/checkout/infra/repository/database/ItemRepositoryDatabase';
+import ItemRepositoryMemory from '../../src/checkout/infra/repository/memory/ItemRepositoryMemory';
+import AbstractRepositoryFactory from '../../src/checkout/domain/factory/AbstractRepositoryFactory';
+import { FactoryRepositoryDatabase } from '../../src/checkout/infra/factory/FactoryRepositoryDatabase';
+import { FactoryRepositoryMemory } from '../../src/checkout/infra/factory/FactoryRepositoryMemory';
 describe("UseCase: Simulate Freigth", () => {
     let simulateFreight: SimulateFreight
     beforeEach(() => {

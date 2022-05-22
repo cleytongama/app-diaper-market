@@ -1,6 +1,6 @@
-import Coupon from '../../src/domain/entity/Coupon';
-import Item from '../../src/domain/entity/Item';
-import Order from '../../src/domain/entity/Order';
+import Coupon from '../../src/checkout/domain/entity/Coupon';
+import Item from '../../src/checkout/domain/entity/Item';
+import Order from '../../src/checkout/domain/entity/Order';
 
 let order: Order;
 

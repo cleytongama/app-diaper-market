@@ -12,7 +12,7 @@
   },
   "jest": {
     "collectCoverage": true,
-    "collectCoverageFrom": ["./dist/src/application/**/*.{ts,js}", "./dist/src/domain/**/*.{ts,js}"],
+    "collectCoverageFrom": ["./dist/src/checkout/application/**/*.{ts,js}", "./dist/src/checkout/domain/**/*.{ts,js}"],
     "coverageThreshold": {
       "global": {
         "lines": 80

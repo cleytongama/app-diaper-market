@@ -1,16 +1,18 @@
-import { PlaceOrderDTO } from '../../src/application/dto/PlaceOrderDTO';
-import GetOrders from '../../src/application/query/GetOrders';
-import PlaceOrder from '../../src/application/usecase/PlaceOrder';
-import OrderDAODatabase from '../../src/infra/dao/OrderDAODatabase';
-import DatabaseConnectionAdapter from '../../src/infra/database/DatabaseConnectionAdapter';
-import ItemRepositoryDatabase from '../../src/infra/repository/database/ItemRepositoryDatabase';
-import OrderRepositoryDatabase from '../../src/infra/repository/database/OrderRepositoryDatabase';
-import CouponRepositoryDatabase from '../../src/infra/repository/database/CouponRepositoryDatabase';
-import { FactoryRepositoryDatabase } from '../../src/infra/factory/FactoryRepositoryDatabase';
-import { FactoryRepositoryMemory } from '../../src/infra/factory/FactoryRepositoryMemory';
+import { PlaceOrderDTO } from '../../src/checkout/application/dto/PlaceOrderDTO';
+import GetOrders from '../../src/checkout/application/query/GetOrders';
+import PlaceOrder from '../../src/checkout/application/usecase/PlaceOrder';
+import OrderDAODatabase from '../../src/checkout/infra/dao/OrderDAODatabase';
+import DatabaseConnectionAdapter from '../../src/shared/infra/database/DatabaseConnectionAdapter';
+import ItemRepositoryDatabase from '../../src/checkout/infra/repository/database/ItemRepositoryDatabase';
+import OrderRepositoryDatabase from '../../src/checkout/infra/repository/database/OrderRepositoryDatabase';
+import CouponRepositoryDatabase from '../../src/checkout/infra/repository/database/CouponRepositoryDatabase';
+import { FactoryRepositoryDatabase } from '../../src/checkout/infra/factory/FactoryRepositoryDatabase';
+import { FactoryRepositoryMemory } from '../../src/checkout/infra/factory/FactoryRepositoryMemory';
+import EventBus from '../../src/shared/infra/event/EventBus';
 
 let placeOrder: PlaceOrder;
 let getOrders: GetOrders;
+const eventBus = new EventBus()
 
 beforeEach(function () {
     const connectDatabase = new DatabaseConnectionAdapter();
@@ -18,7 +20,7 @@ beforeEach(function () {
     // const abstractFactory = new FactoryRepositoryDatabase(connectDatabase)
     //>> Memory
     const abstractFactory = new FactoryRepositoryMemory()
-    placeOrder = new PlaceOrder(abstractFactory);
+    placeOrder = new PlaceOrder(abstractFactory, eventBus);
     const orderDAO = new OrderDAODatabase(connectDatabase);
     getOrders = new GetOrders(orderDAO);
 });

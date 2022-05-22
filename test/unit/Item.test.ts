@@ -1,4 +1,4 @@
-import Item from "../../src/domain/entity/Item"
+import Item from "../../src/checkout/domain/entity/Item"
 
 
 describe("Class Item", () => {
